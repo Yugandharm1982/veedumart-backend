@@ -16,12 +16,19 @@
   .phone{width:390px;background:var(--cream);border-radius:38px;box-shadow:0 30px 60px rgba(44,44,42,0.18);overflow:hidden;position:relative;min-height:780px;}
   .scroll{padding-bottom:90px;max-height:780px;overflow-y:auto;}
   .topbar{padding:20px 20px 0;}
-  .loc-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .loc-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;cursor:pointer;}
   .loc-pin{width:34px;height:34px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--coral-deep);flex-shrink:0;}
   .loc-text p{font-size:11px;color:var(--ink-soft);font-weight:500;}
-  .loc-text span{font-size:14px;font-weight:600;}
-  .search-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:22px;}
+  .loc-text span{font-size:14px;font-weight:600;display:flex;align-items:center;gap:4px;}
+  .search-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:18px;}
   .search-row input{border:none;outline:none;flex:1;font-size:14px;background:transparent;}
+
+  #bannerContainer{margin-bottom:22px;}
+  .banner-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;}
+  .banner-card{flex-shrink:0;min-width:280px;border-radius:16px;padding:18px 20px;}
+  .banner-card .bt{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .banner-card .bs{font-size:12.5px;opacity:0.85;}
+
   .sec-head{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px;margin-bottom:14px;}
   .sec-head h3{font-size:16px;font-weight:600;}
   .cat-scroll{display:flex;gap:14px;overflow-x:auto;padding:0 20px 8px;margin-bottom:24px;}
@@ -29,9 +36,9 @@
   .cat-pill .icon-circle{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;}
   .cat-pill span{font-size:11px;font-weight:500;text-align:center;}
   .cat-pill.active .icon-circle{outline:2px solid var(--teal-deep);}
-  .bg-1{background:var(--sand);} .bg-2{background:#E1F5EE;} .bg-3{background:#FAECE7;} .bg-4{background:#EEEDFE;} .bg-5{background:#E6F1FB;} .bg-all{background:#fff;border:1px solid var(--line);}
+  .bg-1{background:var(--sand);} .bg-2{background:#E1F5EE;} .bg-3{background:#FAECE7;} .bg-4{background:#EEEDFE;} .bg-all{background:#fff;border:1px solid var(--line);}
   .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px;}
-  .pcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+  .pcard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;}
   .pcard .pimg{height:100px;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--sand);}
   .pcard .pinfo{padding:12px 14px 14px;}
   .pcard .pname{font-size:13px;font-weight:600;margin-bottom:3px;}
@@ -49,10 +56,9 @@
   .navitem.active .dot,.navitem.active span{color:var(--teal-deep);font-weight:600;}
   .cart-badge{position:absolute;top:-4px;right:8px;background:var(--coral);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 
-  /* Cart drawer */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;z-index:90;}
   .overlay.show{display:block;}
-  .drawer{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:24px 24px 0 0;z-index:100;transform:translateY(100%);transition:transform .25s;max-height:85%;display:flex;flex-direction:column;}
+  .drawer{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:24px 24px 0 0;z-index:100;transform:translateY(100%);transition:transform .25s;max-height:88%;display:flex;flex-direction:column;}
   .drawer.show{transform:translateY(0);}
   .drawer-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
   .drawer-head h3{font-size:16px;font-weight:600;}
@@ -69,22 +75,66 @@
   input.cf{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px;margin-bottom:10px;font-family:'Inter',sans-serif;}
   textarea.cf{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px;margin-bottom:10px;font-family:'Inter',sans-serif;resize:vertical;min-height:60px;}
   .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--teal-deep);color:#fff;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:500;z-index:200;display:none;}
+
+  /* Address list */
+  .addr-card{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;position:relative;}
+  .addr-card.selected{border-color:var(--teal-deep);background:#F2FAF7;}
+  .addr-card .alabel{font-size:13px;font-weight:600;margin-bottom:3px;}
+  .addr-card .afull{font-size:12px;color:var(--ink-soft);line-height:1.4;}
+  .addr-card .adefault{display:inline-block;background:var(--sand);color:var(--coral-deep);font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-left:6px;}
+  .addr-card .adel{position:absolute;top:12px;right:12px;font-size:12px;color:var(--coral-deep);cursor:pointer;}
+  .add-addr-btn{width:100%;border:1.5px dashed var(--line);background:none;border-radius:12px;padding:14px;font-size:13px;font-weight:600;color:var(--teal-deep);cursor:pointer;margin-bottom:10px;}
+
+  /* Product detail page */
+  .pd-body{padding:0 0 20px;}
+  .pd-img{height:220px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:64px;}
+  .pd-content{padding:18px 20px;}
+  .pd-name{font-size:19px;font-weight:700;margin-bottom:6px;}
+  .pd-meta{font-size:12.5px;color:var(--ink-soft);margin-bottom:12px;}
+  .pd-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;}
+  .pd-price{font-size:22px;font-weight:700;color:var(--teal-deep);}
+  .pd-mrp{font-size:13px;color:var(--ink-soft);text-decoration:line-through;}
+  .pd-desc{font-size:13.5px;color:var(--ink);line-height:1.6;margin-bottom:20px;}
+  .pd-section-title{font-size:14px;font-weight:700;margin-bottom:10px;margin-top:20px;}
+  .pd-prosconsgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .pd-pros,.pd-cons{font-size:12.5px;}
+  .pd-pros li{color:#0F6E56;margin-bottom:6px;list-style:none;padding-left:18px;position:relative;}
+  .pd-pros li:before{content:"✓";position:absolute;left:0;font-weight:700;}
+  .pd-cons li{color:var(--coral-deep);margin-bottom:6px;list-style:none;padding-left:18px;position:relative;}
+  .pd-cons li:before{content:"–";position:absolute;left:0;font-weight:700;}
+  .pd-video{width:100%;border-radius:14px;margin-top:8px;aspect-ratio:16/9;background:#000;}
+  .review-card{border-bottom:1px solid var(--line);padding:14px 0;}
+  .review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+  .review-name{font-size:13px;font-weight:600;}
+  .review-stars{color:#E8A33D;font-size:12px;}
+  .review-comment{font-size:12.5px;color:var(--ink-soft);}
+  .review-date{font-size:10.5px;color:#A8A69E;margin-top:4px;}
+  .add-review-btn{width:100%;background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);border-radius:12px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;margin-top:14px;}
+  .pd-addbar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:12px;}
+  .pd-addbar .addtobag{flex:1;background:var(--coral-deep);color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;}
+  .back-btn{font-size:13px;color:var(--teal-deep);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;}
+  select.cf{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px;margin-bottom:10px;font-family:'Inter',sans-serif;background:#fff;}
+  .star-pick{display:flex;gap:6px;margin-bottom:10px;}
+  .star-pick span{font-size:24px;color:#D8D5CC;cursor:pointer;}
+  .star-pick span.active{color:#E8A33D;}
 </style>
 </head>
 <body>
 
 <div class="phone" id="phone">
-  <div class="scroll">
+  <div class="scroll" id="mainScroll">
     <div class="topbar">
-      <div class="loc-row">
+      <div class="loc-row" id="locRow">
         <div class="loc-pin">📍</div>
-        <div class="loc-text"><p>Delivering to</p><span>Anna Nagar, Chennai</span></div>
+        <div class="loc-text"><p>Delivering to</p><span id="locLabel">Select address ⌄</span></div>
       </div>
       <div class="search-row">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search cleaning supplies, sanitizers...">
       </div>
     </div>
+
+    <div id="bannerContainer"></div>
 
     <div class="sec-head"><h3>Categories</h3></div>
     <div class="cat-scroll" id="catScroll">
@@ -101,30 +151,70 @@
     </div>
   </div>
 
+  <!-- Product detail overlay screen -->
+  <div class="scroll" id="detailScroll" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:var(--cream);z-index:60;">
+    <div id="detailContent"></div>
+  </div>
+
   <div class="bottomnav">
     <div class="navitem active"><div class="dot">⌂</div><span>Home</span></div>
     <div class="navitem" id="openCartBtn">
       <div class="dot">🛍</div><span>Cart</span>
       <div class="cart-badge" id="cartBadge" style="display:none;">0</div>
     </div>
-    <div class="navitem"><div class="dot">☺</div><span>Profile</span></div>
+    <div class="navitem" id="openProfileBtn"><div class="dot">☺</div><span>Profile</span></div>
   </div>
 
   <div class="overlay" id="overlay"></div>
+
   <div class="drawer" id="cartDrawer">
     <div class="drawer-head"><h3>Your cart</h3><span class="close" id="closeCart">✕</span></div>
     <div class="drawer-body" id="cartBody"></div>
     <div class="drawer-foot" id="cartFoot"></div>
+  </div>
+
+  <div class="drawer" id="addressDrawer">
+    <div class="drawer-head"><h3>Delivery address</h3><span class="close" id="closeAddress">✕</span></div>
+    <div class="drawer-body" id="addressBody"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const API = ''; // same origin — when deployed, this stays empty if frontend & backend share a domain
+const API = '';
 let products = [];
-let cart = {}; // { productId: qty }
+let cart = {};
+let currentPhone = localStorage.getItem('vm_phone') || '';
+let addresses = [];
+let selectedAddressId = localStorage.getItem('vm_selected_address') || null;
 
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2800);
+}
+
+// ---------- BANNERS ----------
+async function loadBanners() {
+  const res = await fetch(`${API}/api/banners`);
+  const banners = await res.json();
+  const container = document.getElementById('bannerContainer');
+  if (!banners.length) { container.innerHTML = ''; return; }
+  container.innerHTML = `<div class="banner-scroll">${banners.map(b => `
+    <div class="banner-card" style="background:${b.bgColor};color:${b.textColor};">
+      <p class="bt">${escapeHtml(b.title)}</p>
+      <p class="bs">${escapeHtml(b.subtitle)}</p>
+    </div>`).join('')}</div>`;
+}
+
+// ---------- PRODUCTS ----------
 async function loadProducts(category = '', search = '') {
   const params = new URLSearchParams();
   if (category) params.set('category', category);
@@ -144,15 +234,15 @@ function renderProducts() {
     const qty = cart[p.id] || 0;
     return `
       <div class="pcard">
-        <div class="pimg">🧴</div>
+        <div class="pimg" onclick="openProductDetail(${p.id})">🧴</div>
         <div class="pinfo">
-          <p class="pname">${escapeHtml(p.name)}</p>
+          <p class="pname" onclick="openProductDetail(${p.id})">${escapeHtml(p.name)}</p>
           <p class="pmeta">${escapeHtml(p.category)} · ${p.stock > 0 ? p.stock + ' in stock' : 'Out of stock'}</p>
           <div class="prow">
             <span class="price">₹${p.price}</span>
             ${qty === 0
-              ? `<button class="addbtn" onclick="changeQty(${p.id},1)" ${p.stock===0?'disabled':''}>+</button>`
-              : `<div class="qty-control">
+              ? `<button class="addbtn" onclick="event.stopPropagation();changeQty(${p.id},1)" ${p.stock===0?'disabled':''}>+</button>`
+              : `<div class="qty-control" onclick="event.stopPropagation();">
                    <button onclick="changeQty(${p.id},-1)">−</button>
                    <span>${qty}</span>
                    <button onclick="changeQty(${p.id},1)">+</button>
@@ -166,48 +256,171 @@ function renderProducts() {
 function changeQty(id, delta) {
   const current = cart[id] || 0;
   const next = current + delta;
-  if (next <= 0) {
-    delete cart[id];
-  } else {
-    cart[id] = next;
-  }
+  if (next <= 0) delete cart[id]; else cart[id] = next;
   renderProducts();
   updateCartBadge();
+  if (document.getElementById('detailScroll').style.display !== 'none') {
+    renderProductDetailActions(id);
+  }
 }
 
 function updateCartBadge() {
   const count = Object.values(cart).reduce((a, b) => a + b, 0);
   const badge = document.getElementById('cartBadge');
-  if (count > 0) {
-    badge.style.display = 'flex';
-    badge.textContent = count;
+  if (count > 0) { badge.style.display = 'flex'; badge.textContent = count; }
+  else { badge.style.display = 'none'; }
+}
+
+// ---------- PRODUCT DETAIL ----------
+function openProductDetail(id) {
+  const p = products.find(pr => pr.id === id);
+  if (!p) return;
+  document.getElementById('mainScroll').style.display = 'none';
+  document.getElementById('detailScroll').style.display = 'block';
+  renderProductDetail(p);
+}
+
+function closeProductDetail() {
+  document.getElementById('detailScroll').style.display = 'none';
+  document.getElementById('mainScroll').style.display = 'block';
+}
+
+function renderProductDetail(p) {
+  const avgRating = p.reviews.length
+    ? (p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length).toFixed(1)
+    : null;
+
+  const youtubeEmbed = getYoutubeEmbedUrl(p.videoUrl);
+
+  document.getElementById('detailContent').innerHTML = `
+    <div style="padding:18px 20px 0;"><span class="back-btn" onclick="closeProductDetail()">← Back</span></div>
+    <div class="pd-img">🧴</div>
+    <div class="pd-content">
+      <p class="pd-name">${escapeHtml(p.name)}</p>
+      <p class="pd-meta">${escapeHtml(p.category)} ${avgRating ? `· ⭐ ${avgRating} (${p.reviews.length} reviews)` : '· No reviews yet'}</p>
+      <div class="pd-price-row">
+        <span class="pd-price">₹${p.price}</span>
+        ${p.mrp > p.price ? `<span class="pd-mrp">₹${p.mrp}</span>` : ''}
+      </div>
+      <p class="pd-desc">${escapeHtml(p.description)}</p>
+
+      ${(p.pros.length || p.cons.length) ? `
+        <p class="pd-section-title">Pros & Cons</p>
+        <div class="pd-prosconsgrid">
+          <ul class="pd-pros">${p.pros.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul>
+          <ul class="pd-cons">${p.cons.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul>
+        </div>` : ''}
+
+      ${youtubeEmbed ? `
+        <p class="pd-section-title">Product video</p>
+        <iframe class="pd-video" src="${youtubeEmbed}" frameborder="0" allowfullscreen></iframe>` : ''}
+
+      <p class="pd-section-title">Customer reviews</p>
+      <div id="reviewsList">
+        ${p.reviews.length
+          ? p.reviews.slice().reverse().map(r => `
+            <div class="review-card">
+              <div class="review-top">
+                <span class="review-name">${escapeHtml(r.name)}</span>
+                <span class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+              </div>
+              <p class="review-comment">${escapeHtml(r.comment)}</p>
+              <p class="review-date">${r.date}</p>
+            </div>`).join('')
+          : '<p style="font-size:12.5px;color:#83817A;">No reviews yet — be the first to review this product.</p>'}
+      </div>
+      <button class="add-review-btn" onclick="showReviewForm(${p.id})">Write a review</button>
+      <div id="reviewForm"></div>
+    </div>
+    <div id="pdAddBarWrap"></div>
+  `;
+  renderProductDetailActions(p.id);
+}
+
+function renderProductDetailActions(id) {
+  const p = products.find(pr => pr.id === id);
+  const qty = cart[id] || 0;
+  document.getElementById('pdAddBarWrap').innerHTML = `
+    <div class="pd-addbar">
+      ${qty === 0
+        ? `<button class="addtobag" onclick="changeQty(${id},1)" ${p.stock===0?'disabled':''} style="padding:14px;">${p.stock===0?'Out of stock':'Add to cart — ₹'+p.price}</button>`
+        : `<div class="qty-control" style="flex:1;justify-content:center;border:1px solid var(--line);border-radius:14px;padding:10px;">
+             <button onclick="changeQty(${id},-1)">−</button>
+             <span style="margin:0 16px;font-weight:600;">${qty} in cart</span>
+             <button onclick="changeQty(${id},1)">+</button>
+           </div>`}
+    </div>`;
+}
+
+function getYoutubeEmbedUrl(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+}
+
+function showReviewForm(productId) {
+  document.getElementById('reviewForm').innerHTML = `
+    <div style="margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:16px;">
+      <div class="star-pick" id="starPick">
+        ${[1,2,3,4,5].map(n => `<span data-val="${n}" onclick="pickStar(${n})">★</span>`).join('')}
+      </div>
+      <input class="cf" id="reviewName" placeholder="Your name">
+      <textarea class="cf" id="reviewComment" placeholder="Share your experience with this product"></textarea>
+      <button class="checkout-btn" onclick="submitReview(${productId})">Submit review</button>
+    </div>`;
+}
+
+let pickedStars = 5;
+function pickStar(n) {
+  pickedStars = n;
+  document.querySelectorAll('#starPick span').forEach((el, i) => {
+    el.classList.toggle('active', i < n);
+  });
+}
+
+async function submitReview(productId) {
+  const name = document.getElementById('reviewName').value.trim();
+  const comment = document.getElementById('reviewComment').value.trim();
+  if (!name || !comment) { showToast('Please fill in your name and review'); return; }
+
+  const res = await fetch(`${API}/api/products/${productId}/reviews`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, rating: pickedStars, comment })
+  });
+  if (res.ok) {
+    showToast('Thanks for your review!');
+    const pRes = await fetch(`${API}/api/products/${productId}`);
+    const updated = await pRes.json();
+    const idx = products.findIndex(p => p.id === productId);
+    products[idx] = updated;
+    renderProductDetail(updated);
   } else {
-    badge.style.display = 'none';
+    showToast('Could not submit review');
   }
 }
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-// --- Cart drawer ---
+// ---------- CART DRAWER ----------
 const overlay = document.getElementById('overlay');
-const drawer = document.getElementById('cartDrawer');
+const cartDrawer = document.getElementById('cartDrawer');
+const addressDrawer = document.getElementById('addressDrawer');
 
 document.getElementById('openCartBtn').addEventListener('click', openCart);
-document.getElementById('closeCart').addEventListener('click', closeCart);
-overlay.addEventListener('click', closeCart);
+document.getElementById('closeCart').addEventListener('click', closeDrawers);
+document.getElementById('locRow').addEventListener('click', openAddressPicker);
+document.getElementById('openProfileBtn').addEventListener('click', openAddressPicker);
+document.getElementById('closeAddress').addEventListener('click', closeDrawers);
+overlay.addEventListener('click', closeDrawers);
 
 function openCart() {
   renderCartDrawer();
   overlay.classList.add('show');
-  drawer.classList.add('show');
+  cartDrawer.classList.add('show');
 }
-function closeCart() {
+function closeDrawers() {
   overlay.classList.remove('show');
-  drawer.classList.remove('show');
+  cartDrawer.classList.remove('show');
+  addressDrawer.classList.remove('show');
 }
 
 function renderCartDrawer() {
@@ -229,19 +442,23 @@ function renderCartDrawer() {
     total += lineTotal;
     return `
       <div class="cart-item">
-        <div>
-          <p class="ciname">${escapeHtml(p.name)}</p>
-          <p class="ciprice">₹${p.price} × ${qty}</p>
-        </div>
+        <div><p class="ciname">${escapeHtml(p.name)}</p><p class="ciprice">₹${p.price} × ${qty}</p></div>
         <strong>₹${lineTotal}</strong>
       </div>`;
   }).join('');
 
+  const defaultAddr = addresses.find(a => a.id === Number(selectedAddressId)) || addresses.find(a => a.isDefault);
+
   foot.innerHTML = `
     <div class="total-row"><span>Total</span><span>₹${total}</span></div>
     <input class="cf" id="custName" placeholder="Your name">
-    <input class="cf" id="custPhone" placeholder="Phone number">
-    <textarea class="cf" id="custAddress" placeholder="Delivery address"></textarea>
+    <input class="cf" id="custPhone" placeholder="Phone number" value="${escapeHtml(currentPhone)}">
+    ${defaultAddr
+      ? `<div class="addr-card selected" style="margin-bottom:10px;" onclick="openAddressPicker()">
+           <p class="alabel">${escapeHtml(defaultAddr.label)} <span style="font-size:11px;color:var(--teal-deep);">(change)</span></p>
+           <p class="afull">${escapeHtml(defaultAddr.fullAddress)}</p>
+         </div>`
+      : `<button class="add-addr-btn" onclick="openAddressPicker()">+ Add delivery address</button>`}
     <button class="checkout-btn" id="placeOrderBtn">Place order</button>
   `;
 
@@ -251,54 +468,125 @@ function renderCartDrawer() {
 async function placeOrder() {
   const customerName = document.getElementById('custName').value.trim();
   const phone = document.getElementById('custPhone').value.trim();
-  const address = document.getElementById('custAddress').value.trim();
+  const selected = addresses.find(a => a.id === Number(selectedAddressId)) || addresses.find(a => a.isDefault);
 
-  if (!customerName || !phone || !address) {
-    showToast('Please fill in all delivery details');
-    return;
-  }
+  if (!customerName || !phone) { showToast('Please fill in your name and phone'); return; }
+  if (!selected) { showToast('Please add a delivery address'); return; }
 
   const items = Object.entries(cart).map(([productId, qty]) => ({ productId: Number(productId), qty }));
-
   const btn = document.getElementById('placeOrderBtn');
-  btn.disabled = true;
-  btn.textContent = 'Placing order...';
+  btn.disabled = true; btn.textContent = 'Placing order...';
 
   try {
     const res = await fetch(`${API}/api/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ customerName, phone, address, items })
+      body: JSON.stringify({ customerName, phone, address: `${selected.label}: ${selected.fullAddress}`, items })
     });
     const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Something went wrong'); btn.disabled = false; btn.textContent = 'Place order'; return; }
 
-    if (!res.ok) {
-      showToast(data.error || 'Something went wrong');
-      btn.disabled = false;
-      btn.textContent = 'Place order';
-      return;
-    }
-
+    currentPhone = phone;
+    localStorage.setItem('vm_phone', phone);
     cart = {};
     updateCartBadge();
-    closeCart();
+    closeDrawers();
     showToast(`Order #${data.id} placed! Total ₹${data.total}`);
-    loadProducts(); // refresh stock counts
+    loadProducts();
   } catch (err) {
     showToast('Could not reach the server');
-    btn.disabled = false;
-    btn.textContent = 'Place order';
+    btn.disabled = false; btn.textContent = 'Place order';
   }
 }
 
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 2800);
+// ---------- ADDRESS MANAGEMENT ----------
+async function openAddressPicker() {
+  if (!currentPhone) {
+    const phone = prompt('Enter your phone number to manage delivery addresses:');
+    if (!phone) return;
+    currentPhone = phone.trim();
+    localStorage.setItem('vm_phone', currentPhone);
+  }
+  await loadAddresses();
+  renderAddressDrawer();
+  overlay.classList.add('show');
+  addressDrawer.classList.add('show');
 }
 
-// --- Category filter ---
+async function loadAddresses() {
+  if (!currentPhone) { addresses = []; return; }
+  const res = await fetch(`${API}/api/addresses/${encodeURIComponent(currentPhone)}`);
+  addresses = await res.json();
+  updateLocLabel();
+}
+
+function updateLocLabel() {
+  const def = addresses.find(a => a.id === Number(selectedAddressId)) || addresses.find(a => a.isDefault);
+  document.getElementById('locLabel').textContent = def ? `${def.label} ⌄` : 'Select address ⌄';
+}
+
+function renderAddressDrawer() {
+  const body = document.getElementById('addressBody');
+  body.innerHTML = `
+    ${addresses.map(a => `
+      <div class="addr-card ${Number(selectedAddressId) === a.id ? 'selected' : ''}" onclick="selectAddress(${a.id})">
+        <p class="alabel">${escapeHtml(a.label)} ${a.isDefault ? '<span class="adefault">Default</span>' : ''}</p>
+        <p class="afull">${escapeHtml(a.fullAddress)}</p>
+        <span class="adel" onclick="event.stopPropagation();deleteAddress(${a.id})">Delete</span>
+      </div>`).join('')}
+    ${addresses.length < 5
+      ? `<button class="add-addr-btn" onclick="showAddAddressForm()">+ Add new address (${addresses.length}/5)</button>`
+      : `<p style="font-size:12px;color:var(--ink-soft);text-align:center;">Maximum 5 addresses reached</p>`}
+    <div id="addAddressForm"></div>
+  `;
+}
+
+function showAddAddressForm() {
+  document.getElementById('addAddressForm').innerHTML = `
+    <div style="border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:6px;">
+      <select class="cf" id="newAddrLabel">
+        <option>Home</option><option>Office</option><option>Other</option>
+      </select>
+      <textarea class="cf" id="newAddrFull" placeholder="Full delivery address — house no, street, area, landmark"></textarea>
+      <button class="checkout-btn" onclick="saveNewAddress()">Save address</button>
+    </div>`;
+}
+
+async function saveNewAddress() {
+  const label = document.getElementById('newAddrLabel').value;
+  const fullAddress = document.getElementById('newAddrFull').value.trim();
+  if (!fullAddress) { showToast('Please enter the full address'); return; }
+
+  const res = await fetch(`${API}/api/addresses/${encodeURIComponent(currentPhone)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ label, fullAddress })
+  });
+  const data = await res.json();
+  if (!res.ok) { showToast(data.error || 'Could not save address'); return; }
+
+  await loadAddresses();
+  selectedAddressId = data.id;
+  localStorage.setItem('vm_selected_address', selectedAddressId);
+  renderAddressDrawer();
+  showToast('Address saved');
+}
+
+function selectAddress(id) {
+  selectedAddressId = id;
+  localStorage.setItem('vm_selected_address', id);
+  updateLocLabel();
+  renderAddressDrawer();
+}
+
+async function deleteAddress(id) {
+  if (!confirm('Delete this address?')) return;
+  await fetch(`${API}/api/addresses/${encodeURIComponent(currentPhone)}/${id}`, { method: 'DELETE' });
+  await loadAddresses();
+  renderAddressDrawer();
+}
+
+// ---------- CATEGORY + SEARCH ----------
 document.getElementById('catScroll').addEventListener('click', (e) => {
   const pill = e.target.closest('.cat-pill');
   if (!pill) return;
@@ -307,7 +595,6 @@ document.getElementById('catScroll').addEventListener('click', (e) => {
   loadProducts(pill.dataset.cat, document.getElementById('searchInput').value);
 });
 
-// --- Search ---
 let searchTimeout;
 document.getElementById('searchInput').addEventListener('input', (e) => {
   clearTimeout(searchTimeout);
@@ -317,7 +604,10 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   }, 300);
 });
 
+// ---------- INIT ----------
+loadBanners();
 loadProducts();
+if (currentPhone) loadAddresses();
 </script>
 </body>
 </html>

@@ -20,11 +20,14 @@
   .card h3{font-size:15px;font-weight:700;margin-bottom:16px;}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:'Inter',sans-serif;}
+  input[type=color]{padding:4px;height:40px;}
   label{font-size:12px;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:5px;}
   .field{margin-bottom:4px;}
+  .field.full{grid-column:1 / -1;}
   .btn{background:var(--teal-deep);color:#fff;border:none;border-radius:8px;padding:11px 20px;font-size:13.5px;font-weight:600;cursor:pointer;margin-top:14px;}
   .btn.danger{background:var(--coral-deep);}
   .btn.small{padding:6px 12px;font-size:12px;margin-top:0;}
+  .btn.secondary{background:#8a8779;}
   table{width:100%;border-collapse:collapse;font-size:13px;}
   th{text-align:left;padding:10px 12px;background:#F2EFE8;font-weight:600;color:var(--ink-soft);font-size:11.5px;text-transform:uppercase;letter-spacing:0.03em;}
   td{padding:12px;border-bottom:1px solid var(--line);}
@@ -36,26 +39,28 @@
   select.status-select{width:auto;padding:6px 10px;font-size:12px;}
   .order-items{font-size:12px;color:var(--ink-soft);}
   .empty{color:var(--ink-soft);font-size:13px;padding:20px;text-align:center;}
+  .hint{font-size:11.5px;color:var(--ink-soft);margin-top:-2px;margin-bottom:8px;}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <h1>VeeduMart Admin</h1>
-  <span style="font-size:12px;opacity:0.8;">Manage products & orders</span>
+  <span style="font-size:12px;opacity:0.8;">Manage products, orders & banners</span>
 </div>
 
 <div class="tabs">
   <div class="tab active" data-panel="orders">Orders</div>
   <div class="tab" data-panel="products">Products</div>
+  <div class="tab" data-panel="banners">Banners</div>
 </div>
 
 <div class="panel active" id="orders">
   <div class="card">
     <h3>All orders</h3>
     <table>
-      <thead><tr><th>ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Placed</th></tr></thead>
-      <tbody id="ordersTable"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th>ID</th><th>Customer</th><th>Items</th><th>Address</th><th>Total</th><th>Status</th><th>Placed</th></tr></thead>
+      <tbody id="ordersTable"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody>
     </table>
   </div>
 </div>
@@ -75,17 +80,53 @@
       <div class="field"><label>Selling price (₹)</label><input id="pPrice" type="number"></div>
       <div class="field"><label>MRP (₹, optional)</label><input id="pMrp" type="number"></div>
       <div class="field"><label>Stock quantity</label><input id="pStock" type="number"></div>
-      <div class="field"><label>Description</label><input id="pDesc" placeholder="Short description"></div>
+      <div class="field"><label>YouTube video URL (optional)</label><input id="pVideo" placeholder="https://youtube.com/watch?v=..."></div>
+      <div class="field full"><label>Description</label><input id="pDesc" placeholder="Short description"></div>
+      <div class="field full">
+        <label>Pros (one per line)</label>
+        <textarea id="pPros" rows="3" placeholder="Strong fragrance&#10;Cuts grease easily&#10;Safe on tile & marble"></textarea>
+      </div>
+      <div class="field full">
+        <label>Cons (one per line)</label>
+        <textarea id="pCons" rows="3" placeholder="Bottle cap loosens over time"></textarea>
+      </div>
     </div>
     <button class="btn" id="saveProductBtn">Add product</button>
-    <button class="btn" style="background:#8a8779;display:none;" id="cancelEditBtn">Cancel edit</button>
+    <button class="btn secondary" style="display:none;" id="cancelEditBtn">Cancel edit</button>
   </div>
 
   <div class="card">
     <h3>All products</h3>
     <table>
-      <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th></th></tr></thead>
-      <tbody id="productsTable"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+      <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Reviews</th><th></th></tr></thead>
+      <tbody id="productsTable"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel" id="banners">
+  <div class="card">
+    <h3 id="bannerFormTitle">Add a new banner</h3>
+    <p class="hint">Banners show on the homepage. Change this daily for new offers/promotions.</p>
+    <input type="hidden" id="editBannerId">
+    <div class="form-grid">
+      <div class="field full"><label>Title</label><input id="bTitle" placeholder="e.g. Weekend Special"></div>
+      <div class="field full"><label>Subtitle</label><input id="bSubtitle" placeholder="e.g. Flat 15% off cleaning supplies"></div>
+      <div class="field"><label>Background color</label><input id="bBgColor" type="color" value="#0F6E56"></div>
+      <div class="field"><label>Text color</label><input id="bTextColor" type="color" value="#FFFFFF"></div>
+      <div class="field"><label>Show on homepage?</label>
+        <select id="bActive"><option value="true">Yes, show it</option><option value="false">No, hide it</option></select>
+      </div>
+    </div>
+    <button class="btn" id="saveBannerBtn">Add banner</button>
+    <button class="btn secondary" style="display:none;" id="cancelBannerEditBtn">Cancel edit</button>
+  </div>
+
+  <div class="card">
+    <h3>All banners</h3>
+    <table>
+      <thead><tr><th>Preview</th><th>Title</th><th>Status</th><th></th></tr></thead>
+      <tbody id="bannersTable"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody>
     </table>
   </div>
 </div>
@@ -102,13 +143,19 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
 // ---------- ORDERS ----------
 async function loadOrders() {
   const res = await fetch(`${API}/api/orders`);
   const orders = await res.json();
   const tbody = document.getElementById('ordersTable');
   if (!orders.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty">No orders yet.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="empty">No orders yet.</td></tr>';
     return;
   }
   tbody.innerHTML = orders.map(o => `
@@ -116,6 +163,7 @@ async function loadOrders() {
       <td>#${o.id}</td>
       <td>${escapeHtml(o.customerName)}<br><span style="color:#6B6962;font-size:11.5px;">${escapeHtml(o.phone)}</span></td>
       <td class="order-items">${o.items.map(i => `${escapeHtml(i.name)} ×${i.qty}`).join('<br>')}</td>
+      <td style="font-size:11.5px;max-width:160px;">${escapeHtml(o.address || '')}</td>
       <td><strong>₹${o.total}</strong></td>
       <td>
         <select class="status-select" onchange="updateStatus(${o.id}, this.value)">
@@ -130,9 +178,7 @@ async function loadOrders() {
 
 async function updateStatus(id, status) {
   await fetch(`${API}/api/orders/${id}/status`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ status })
+    method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status })
   });
   loadOrders();
 }
@@ -143,7 +189,7 @@ async function loadProducts() {
   const products = await res.json();
   const tbody = document.getElementById('productsTable');
   if (!products.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty">No products yet.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="empty">No products yet.</td></tr>';
     return;
   }
   tbody.innerHTML = products.map(p => `
@@ -152,8 +198,9 @@ async function loadProducts() {
       <td>${escapeHtml(p.category)}</td>
       <td>₹${p.price}</td>
       <td>${p.stock}</td>
+      <td>${p.reviews.length}</td>
       <td>
-        <button class="btn small" onclick='editProduct(${JSON.stringify(p)})'>Edit</button>
+        <button class="btn small" onclick='editProduct(${JSON.stringify(p).replace(/'/g, "&apos;")})'>Edit</button>
         <button class="btn small danger" onclick="deleteProduct(${p.id})">Delete</button>
       </td>
     </tr>
@@ -168,22 +215,18 @@ document.getElementById('saveProductBtn').addEventListener('click', async () => 
     price: Number(document.getElementById('pPrice').value),
     mrp: Number(document.getElementById('pMrp').value) || undefined,
     stock: Number(document.getElementById('pStock').value) || 0,
-    description: document.getElementById('pDesc').value.trim()
+    description: document.getElementById('pDesc').value.trim(),
+    videoUrl: document.getElementById('pVideo').value.trim(),
+    pros: document.getElementById('pPros').value.split('\n').map(s => s.trim()).filter(Boolean),
+    cons: document.getElementById('pCons').value.split('\n').map(s => s.trim()).filter(Boolean)
   };
 
-  if (!body.name || !body.price) {
-    alert('Name and price are required');
-    return;
-  }
+  if (!body.name || !body.price) { alert('Name and price are required'); return; }
 
   if (id) {
-    await fetch(`${API}/api/products/${id}`, {
-      method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
-    });
+    await fetch(`${API}/api/products/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   } else {
-    await fetch(`${API}/api/products`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
-    });
+    await fetch(`${API}/api/products`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   }
   resetForm();
   loadProducts();
@@ -196,10 +239,14 @@ function editProduct(p) {
   document.getElementById('pPrice').value = p.price;
   document.getElementById('pMrp').value = p.mrp;
   document.getElementById('pStock').value = p.stock;
+  document.getElementById('pVideo').value = p.videoUrl || '';
   document.getElementById('pDesc').value = p.description;
+  document.getElementById('pPros').value = (p.pros || []).join('\n');
+  document.getElementById('pCons').value = (p.cons || []).join('\n');
   document.getElementById('formTitle').textContent = `Edit: ${p.name}`;
   document.getElementById('saveProductBtn').textContent = 'Save changes';
   document.getElementById('cancelEditBtn').style.display = 'inline-block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function resetForm() {
@@ -208,7 +255,10 @@ function resetForm() {
   document.getElementById('pPrice').value = '';
   document.getElementById('pMrp').value = '';
   document.getElementById('pStock').value = '';
+  document.getElementById('pVideo').value = '';
   document.getElementById('pDesc').value = '';
+  document.getElementById('pPros').value = '';
+  document.getElementById('pCons').value = '';
   document.getElementById('formTitle').textContent = 'Add a new product';
   document.getElementById('saveProductBtn').textContent = 'Add product';
   document.getElementById('cancelEditBtn').style.display = 'none';
@@ -222,15 +272,84 @@ async function deleteProduct(id) {
   loadProducts();
 }
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+// ---------- BANNERS ----------
+async function loadBanners() {
+  const res = await fetch(`${API}/api/banners?all=true`);
+  const banners = await res.json();
+  const tbody = document.getElementById('bannersTable');
+  if (!banners.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty">No banners yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = banners.map(b => `
+    <tr>
+      <td><div style="background:${b.bgColor};color:${b.textColor};padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;display:inline-block;">${escapeHtml(b.title)}</div></td>
+      <td>${escapeHtml(b.title)}<br><span style="font-size:11.5px;color:#6B6962;">${escapeHtml(b.subtitle)}</span></td>
+      <td><span class="status-badge ${b.active ? 'status-delivered' : 'status-cancelled'}">${b.active ? 'Active' : 'Hidden'}</span></td>
+      <td>
+        <button class="btn small" onclick='editBanner(${JSON.stringify(b).replace(/'/g, "&apos;")})'>Edit</button>
+        <button class="btn small danger" onclick="deleteBanner(${b.id})">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+document.getElementById('saveBannerBtn').addEventListener('click', async () => {
+  const id = document.getElementById('editBannerId').value;
+  const body = {
+    title: document.getElementById('bTitle').value.trim(),
+    subtitle: document.getElementById('bSubtitle').value.trim(),
+    bgColor: document.getElementById('bBgColor').value,
+    textColor: document.getElementById('bTextColor').value,
+    active: document.getElementById('bActive').value === 'true'
+  };
+  if (!body.title) { alert('Title is required'); return; }
+
+  if (id) {
+    await fetch(`${API}/api/banners/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  } else {
+    await fetch(`${API}/api/banners`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  }
+  resetBannerForm();
+  loadBanners();
+});
+
+function editBanner(b) {
+  document.getElementById('editBannerId').value = b.id;
+  document.getElementById('bTitle').value = b.title;
+  document.getElementById('bSubtitle').value = b.subtitle;
+  document.getElementById('bBgColor').value = b.bgColor;
+  document.getElementById('bTextColor').value = b.textColor;
+  document.getElementById('bActive').value = String(b.active);
+  document.getElementById('bannerFormTitle').textContent = `Edit: ${b.title}`;
+  document.getElementById('saveBannerBtn').textContent = 'Save changes';
+  document.getElementById('cancelBannerEditBtn').style.display = 'inline-block';
+}
+
+function resetBannerForm() {
+  document.getElementById('editBannerId').value = '';
+  document.getElementById('bTitle').value = '';
+  document.getElementById('bSubtitle').value = '';
+  document.getElementById('bBgColor').value = '#0F6E56';
+  document.getElementById('bTextColor').value = '#FFFFFF';
+  document.getElementById('bActive').value = 'true';
+  document.getElementById('bannerFormTitle').textContent = 'Add a new banner';
+  document.getElementById('saveBannerBtn').textContent = 'Add banner';
+  document.getElementById('cancelBannerEditBtn').style.display = 'none';
+}
+
+document.getElementById('cancelBannerEditBtn').addEventListener('click', resetBannerForm);
+
+async function deleteBanner(id) {
+  if (!confirm('Delete this banner?')) return;
+  await fetch(`${API}/api/banners/${id}`, { method: 'DELETE' });
+  loadBanners();
 }
 
 loadOrders();
 loadProducts();
-setInterval(loadOrders, 15000); // auto-refresh orders every 15s
+loadBanners();
+setInterval(loadOrders, 15000);
 </script>
 </body>
 </html>
